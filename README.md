@@ -1,4 +1,4 @@
-#### HOW TO USE MATLAB: Example
+### HOW TO USE MATLAB: Example
 
 This is an example of how to use MATLAB in Analytics. MATLAB is a powerful tool for developing AI models using cutting-edge techniques.  In this example, we will explore how to choose the appropiate split predictor selection technique for out dataset when growing a random forest of regression trees. 
 
