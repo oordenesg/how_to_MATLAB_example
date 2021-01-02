@@ -43,3 +43,31 @@ xlabel('Predictor variable')
 ylabel('Number of levels')
 
 ```
+
+#### Section 3: Train Bagged Ensemble of Regression Trees.
+
+It is time to train a bagged ensemble of 200 regression trees to estimate predictor importance values. In this part, we can define a treer learner using the function templateTree. When called without any arguments, t = templateTree, the function returns a default decision-tree-learner-template suitable for a training an ensemble.
+Within this function we apply the following properties and values:
+1. Set 'NumVariablesToSample' to 'all' — This option enforces that all predictors are used for each split. 
+2. Set 'PredictorSelection' to 'interaction-curvature' — This option selects the algorithm used to select the best predictor at each node
+3. Set 'Surrogate' to 'on' —  Since the data set includes missing values, this option specifies that the tree uses surrogate splits to increase accuracy.
+
+```matlab
+t = templateTree('NumVariablesToSample','all','PredictorSelection','interaction-curvature','Surrogate','on');
+```
+
+Now it is time to create an ensemble regression tree model Mdl usint the fitrensemble function and the three template t. Train on the data in the table X, where the response column is 'MPG'. Use a bootstrap aggregation method with 200 learning cycles.
+
+```matlab
+Mdl = fitrensemble(X,'MPG','Learners',t,'NumLearningCycles',200);
+```
+Finally, we use our Mdl model and the MATLAB function obbPredict to calculate the ensemble prediction yhat and the estimate model 
+
+```matlab
+yHat = predict(Mdl,Mdl.X);
+R2 = corr(Mdl.Y,yHat)^2
+```
+
+#### Section 4: Predictor Importance Estimation
+
+
