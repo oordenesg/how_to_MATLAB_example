@@ -68,6 +68,3 @@ yHat = predict(Mdl,Mdl.X);
 R2 = corr(Mdl.Y,yHat)^2
 ```
 
-#### Section 4: Predictor Importance Estimation
-
-
